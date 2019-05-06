@@ -25,6 +25,7 @@ export default class Main extends Component {
     e.preventDefault();
 
     this.setState({ loading: true });
+    this.setState({ repositoryError: false });
 
     try {
       const { data: repository } = await api.get(
@@ -33,8 +34,13 @@ export default class Main extends Component {
 
       repository.lastComit = moment(repository.pushed_at).fromNow();
 
-      if (this.state.repositories.indexOf(repository.id))
+      const empty = this.state.repositories.length > 0 ? false : true;
+      if (
+        !empty &&
+        this.state.repositories.some(el => el.id === repository.id)
+      ) {
         throw new Error("Repository alredy exists");
+      }
 
       this.setState({
         repositoryInput: "",
