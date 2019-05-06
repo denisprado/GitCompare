@@ -53,4 +53,25 @@ export const Repository = styled.div`
       }
     }
   }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    button {
+      width: 80px;
+      height: 55px;
+      padding: 0px 20px;
+      margin-left: 10px;
+      background: #63f5b8;
+      border: 0;
+      font-size: 20px;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 3px;
+      &:hover {
+        background: #52d89f;
+        cursor: pointer;
+      }
+    }
+  }
 `;
