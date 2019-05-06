@@ -1,1 +1,1 @@
-web: run start
+start: "node server.js"
