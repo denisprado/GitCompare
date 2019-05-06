@@ -41,6 +41,7 @@ export default class Main extends Component {
         repositories: [...this.state.repositories, repository]
       });
     } catch (err) {
+      console.log(err);
       this.setState({ repositoryError: true });
     } finally {
       this.setState({ loading: false });
