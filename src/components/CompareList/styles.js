@@ -58,19 +58,33 @@ export const Repository = styled.div`
     display: flex;
     flex-direction: row;
     button {
-      width: 80px;
-      height: 55px;
-      padding: 0px 20px;
-      margin-left: 10px;
-      background: #63f5b8;
+      width: 50px;
+      height: 50px;
+      padding: 3px 7px;
+      margin: 8px;
+      background: #fff;
       border: 0;
       font-size: 20px;
       color: #fff;
       font-weight: bold;
       border-radius: 3px;
-      &:hover {
-        background: #52d89f;
-        cursor: pointer;
+      cursor: pointer;
+
+      &.remove {
+        color: #f99;
+        border: 1px solid #f99;
+        &:hover {
+          background-color: #f99;
+          color: #fff;
+        }
+      }
+      &.update {
+        color: #ffd151;
+        border: 1px solid #ffd151;
+        &:hover {
+          background-color: #ffd151;
+          color: #fff;
+        }
       }
     }
   }

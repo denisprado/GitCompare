@@ -22,17 +22,14 @@ export default class Main extends Component {
   }
 
   handleUpdateRepo = async repo => {
+    const { repositories } = this.state;
     try {
-      const { data: repository } = await api.get(
-        `repos/${repo.owner.login}/${repo.name}`
-      );
+      const { data } = await api.get(`repos/${repo.full_name}`);
 
-      repository.lastComit = moment(repository.pushed_at).fromNow();
+      data.lastComit = moment(data.pushed_at).fromNow();
 
       this.setState({
-        repositories: this.state.repositories.map(el =>
-          el.id === repo.id ? { ...el, repo } : el
-        )
+        repositories: repositories.map(rep => (rep.id === data.id ? data : rep))
       });
     } catch (err) {
       this.setState({ repositoryError: true });

@@ -34,8 +34,20 @@ class CompareList extends Component {
                 <small> last commit</small>
               </li>
             </ul>
-            <button onClick={() => handleRemove(repository.id)}>Excluir</button>
-            <button onClick={() => handleUpdate(repository)}>Update</button>
+            <footer>
+              <button
+                className="remove"
+                onClick={() => handleRemove(repository.id)}
+              >
+                <i className="fa fa-trash" />
+              </button>
+              <button
+                className="update"
+                onClick={() => handleUpdate(repository)}
+              >
+                <i className="fa fa-refresh" />
+              </button>
+            </footer>
           </Repository>
         ))}
       </Container>
