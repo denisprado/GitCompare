@@ -21,6 +21,33 @@ export default class Main extends Component {
     }
   }
 
+  handleUpdateRepo = async repo => {
+    try {
+      const { data: repository } = await api.get(
+        `repos/${repo.owner.login}/${repo.name}`
+      );
+
+      repository.lastComit = moment(repository.pushed_at).fromNow();
+
+      this.setState({
+        repositories: this.state.repositories.map(el =>
+          el.id === repo.id ? { ...el, repo } : el
+        )
+      });
+    } catch (err) {
+      this.setState({ repositoryError: true });
+    } finally {
+      localStorage.repositories = JSON.stringify(this.state.repositories);
+    }
+  };
+
+  handleRemoveRepo = id => {
+    const repositories = this.state.repositories.filter(rep => rep.id !== id);
+    this.setState({ repositories }, () => {
+      localStorage.repositories = JSON.stringify(this.state.repositories);
+    });
+  };
+
   handleAddRepository = async e => {
     e.preventDefault();
 
@@ -34,7 +61,7 @@ export default class Main extends Component {
 
       repository.lastComit = moment(repository.pushed_at).fromNow();
 
-      const empty = this.state.repositories.length > 0 ? false : true;
+      const empty = this.state.repositories.length > 0 ? false : true; //test if state is empty
       if (
         !empty &&
         this.state.repositories.some(el => el.id === repository.id)
@@ -81,7 +108,11 @@ export default class Main extends Component {
             )}
           </button>
         </Form>
-        <CompareList repositories={this.state.repositories} />
+        <CompareList
+          repositories={this.state.repositories}
+          handleRemove={this.handleRemoveRepo}
+          handleUpdate={this.handleUpdateRepo}
+        />
       </Container>
     );
   }

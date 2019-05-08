@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 class CompareList extends Component {
   render() {
-    const { repositories } = this.props;
+    const { repositories, handleRemove, handleUpdate } = this.props;
     return (
       <Container>
         {repositories.map(repository => (
@@ -34,6 +34,8 @@ class CompareList extends Component {
                 <small> last commit</small>
               </li>
             </ul>
+            <button onClick={() => handleRemove(repository.id)}>Excluir</button>
+            <button onClick={() => handleUpdate(repository)}>Update</button>
           </Repository>
         ))}
       </Container>
